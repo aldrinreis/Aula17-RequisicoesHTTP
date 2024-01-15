@@ -1,3 +1,7 @@
+/* INICIAR SERVIDOR HTTP
+  json-server --watch db.json
+*/
+
 const axios = require("./api.js");
 
 function carregarEstados1() {
@@ -27,5 +31,28 @@ async function alterarEstado() {
   }
 }
 
-alterarEstado();
-carregarEstados();
+async function incluirEstado() {
+  try {
+    var response = await axios.api.post("/estados", {
+      id: "DF",
+      nome: "Distrito Federal",
+    });
+    console.log(response.data);
+  } catch (erro) {
+    console.log("ocorreu um erro ao incluir o estado");
+  }
+}
+
+async function deletarEstado() {
+  try {
+    var response = await axios.api.delete("/estados/DF");
+    console.log("Estado deletado com sucesso");
+  } catch (erro) {
+    console.log("ocorreu um erro ao excluir o estado");
+  }
+}
+
+//alterarEstado();
+//carregarEstados();
+//incluirEstado();
+deletarEstado();
